@@ -27,11 +27,11 @@ func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := service.AddUser(req)
 	if err != nil {
-		if err.Error() == "user with same name already exists"{
+		if err.Error() == "user with same name already exists" {
 			err := map[string]interface{}{"message": err.Error()}
 			w.Header().Set("Content-type", "applciation/json")
 			respond.With(w, r, http.StatusConflict, err)
-		}else {
+		} else {
 			err := map[string]interface{}{"message": err.Error()}
 			w.Header().Set("Content-type", "applciation/json")
 			respond.With(w, r, http.StatusBadRequest, err)
@@ -77,5 +77,3 @@ func GetUserWithPaginationHandler(w http.ResponseWriter, r *http.Request) {
 		respond.With(w, r, http.StatusOK, resp)
 	}
 }
-
-

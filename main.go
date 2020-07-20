@@ -27,8 +27,6 @@ func main() {
 
 }
 
-
-
 type Monitor struct {
 	Alloc,
 	TotalAlloc,

@@ -74,7 +74,7 @@ func GetUser(limit int, offset int) (r model.LimitedUsers, err error) {
 	}
 	if len(users) > 0 {
 		resp := make([]model.User, len(users))
-		for idx, r := range users{
+		for idx, r := range users {
 			resp[idx].Uid = r.Uid
 			resp[idx].Name = r.Name
 			resp[idx].Age = r.Age
@@ -83,7 +83,7 @@ func GetUser(limit int, offset int) (r model.LimitedUsers, err error) {
 		}
 		r.Users = resp
 		r.Count = count
-	}else {
+	} else {
 		err = errors.New("no data found")
 	}
 
@@ -113,4 +113,3 @@ func ReloadDataToRedis() (err error) {
 	}
 	return
 }
-

@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	host           = "redis-18935.c44.us-east-1-2.ec2.cloud.redislabs.com:18935"
-	password       = "S635CyTBCfYvOlcMwQspvjPX7dKRRsQ0"
-	key = "set"
+	host     = "redis-18935.c44.us-east-1-2.ec2.cloud.redislabs.com:18935"
+	password = "S635CyTBCfYvOlcMwQspvjPX7dKRRsQ0"
+	key      = "set"
 )
 
 var rs *redis.Client
@@ -39,10 +39,10 @@ func SetUserDataToRedis(data store.User) (err error) {
 	if err != nil {
 		return
 	}
-	p :=redis.Z{
+	p := redis.Z{
 		Member: userData,
 	}
-	err = rs.ZAdd(key,p).Err()
+	err = rs.ZAdd(key, p).Err()
 	if err != nil {
 		err = errors.New("failed to set user data to redis")
 		return
@@ -52,14 +52,14 @@ func SetUserDataToRedis(data store.User) (err error) {
 
 func GetUserDataFromRedis(start int, end int) (user []store.User, count int64, err error) {
 
-	data, err := rs.ZRange(key,int64(start),int64(end)).Result()
+	data, err := rs.ZRange(key, int64(start), int64(end)).Result()
 	if err != nil {
 		err = errors.New("failed to get user data from redis")
 		return
 	}
-	if len(data) > 0{
-		users := make([]store.User,len(data))
-		for idx, d :=range data{
+	if len(data) > 0 {
+		users := make([]store.User, len(data))
+		for idx, d := range data {
 			err = json.Unmarshal([]byte(d), &users[idx])
 			if err != nil {
 				return
@@ -67,7 +67,7 @@ func GetUserDataFromRedis(start int, end int) (user []store.User, count int64, e
 		}
 		user = users
 	}
-	allUsers, err := rs.ZRange(key,0, math.MaxInt64).Result()
+	allUsers, err := rs.ZRange(key, 0, math.MaxInt64).Result()
 	if err != nil {
 		err = errors.New("failed to get user data from redis")
 		return

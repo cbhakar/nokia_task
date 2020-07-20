@@ -7,14 +7,14 @@ import (
 )
 
 var (
-	DefaultPageNum   = 1
-	DefaultPageSize  = 10
-	MaxPageSize      = 100
+	DefaultPageNum  = 1
+	DefaultPageSize = 10
+	MaxPageSize     = 100
 
 	ErrPageSizeNotAllowed  = errors.New("page size invalid")
 	ErrInvalidPagination   = errors.New("invalid pagination data")
 	ErrInvalidPgQueryValue = errors.New("invalid pagination values in query")
-	)
+)
 
 type User struct {
 	Id       uint64 `json:"id,omitempty" db:"id"`
@@ -25,8 +25,8 @@ type User struct {
 	MobileNo string `json:"mobile_no" db:"mobile"`
 }
 type LimitedUsers struct {
-	Users   []User	`json:"users"`
-	Count    int64 `json:"count"`
+	Users []User `json:"users"`
+	Count int64  `json:"count"`
 }
 
 type Pagination struct {
@@ -104,6 +104,6 @@ func (p Pagination) GetOffset() (offset int) {
 
 func (p Pagination) mustValid() {
 	if p.PageNum < 1 || p.PageSize < 1 || p.PageSize > MaxPageSize {
-		panic( "incorrect pagination")
+		panic("incorrect pagination")
 	}
 }

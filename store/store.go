@@ -70,7 +70,6 @@ func AddNewUser(u User) (resp User, err error) {
 	return
 }
 
-
 func GetAllUsers() (r []User, err error) {
 	if db == nil {
 		err = errors.New("unable to connect to database")
@@ -83,7 +82,6 @@ func GetAllUsers() (r []User, err error) {
 	return
 }
 
-
 func GetAllUsersCount() (r int64, err error) {
 	if db == nil {
 		err = errors.New("unable to connect to database")
@@ -95,7 +93,6 @@ func GetAllUsersCount() (r int64, err error) {
 
 	return
 }
-
 
 func GetUsersWithPagination(limit int, offset int) (r []User, err error) {
 	if db == nil {
